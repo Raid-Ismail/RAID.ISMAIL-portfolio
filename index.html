@@ -369,6 +369,39 @@
   ::-webkit-scrollbar-thumb{background:linear-gradient(var(--indigo-soft), var(--pink)); border-radius:10px;}
   ::-webkit-scrollbar-thumb:hover{background:linear-gradient(var(--pink), var(--cyan));}
 
+  /* ============ testimonial ============ */
+  .testimonial-card{
+    position:relative; border:1px solid var(--line); border-radius:22px;
+    background:var(--bg-panel); padding:44px 40px; max-width:760px; margin:0 auto;
+    overflow:hidden;
+  }
+  .testimonial-card::before{
+    content:'"'; position:absolute; top:-10px; left:24px; font-family:'Syne',sans-serif;
+    font-size:140px; line-height:1; color:transparent;
+    background:linear-gradient(160deg, var(--indigo-soft), var(--pink));
+    -webkit-background-clip:text; background-clip:text; opacity:.25;
+  }
+  .testimonial-quote{
+    position:relative; font-size:18px; line-height:1.8; color:#d8d8ea; margin-bottom:30px;
+  }
+  .testimonial-person{display:flex; align-items:center; gap:16px; width:fit-content; transition:transform .3s ease;}
+  .testimonial-person:hover{transform:translateX(6px);}
+  .testimonial-person:hover .testimonial-avatar{box-shadow:0 0 0 4px rgba(35,229,211,.18);}
+  .testimonial-avatar{
+    width:52px; height:52px; border-radius:50%; flex-shrink:0;
+    background:linear-gradient(140deg, var(--indigo), var(--pink));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Syne',sans-serif; font-weight:800; font-size:18px; color:#fff;
+    transition:box-shadow .3s ease;
+  }
+  .testimonial-person h4{font-size:16px; margin-bottom:3px;}
+  .testimonial-person p{font-size:13px; color:var(--text-dim); line-height:1.5;}
+  .testimonial-badge{
+    display:inline-flex; align-items:center; gap:7px; font-size:12px; color:var(--cyan);
+    margin-top:14px; padding:6px 14px; border:1px solid rgba(35,229,211,.25); border-radius:999px;
+  }
+  .testimonial-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan); box-shadow:0 0 8px 2px rgba(35,229,211,.7);}
+
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
   }
@@ -396,6 +429,7 @@
       <li><a href="#experience" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth',block:'start'});return false;">Experience</a></li>
       <li><a href="#projects" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth',block:'start'});return false;">Projects</a></li>
       <li><a href="#education" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth',block:'start'});return false;">Education</a></li>
+      <li><a href="#testimonial" onclick="document.getElementById('testimonial').scrollIntoView({behavior:'smooth',block:'start'});return false;">Recommendation</a></li>
       <li><a href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth',block:'start'});return false;">Contact</a></li>
     </ul>
   </nav>
@@ -675,6 +709,24 @@
         <div class="cert-item"><h4>Fortinet NSE 2 — Evolution Cybersecurity</h4><span>Mar 2023</span></div>
         <div class="cert-item"><h4>Fortinet NSE 3 — Product Awareness</h4><span>Mar 2023</span></div>
       </div>
+    </div>
+  </section>
+
+  <section id="testimonial">
+    <div class="sec-head reveal">
+      <h2>Recommendation</h2>
+      <p>What it's like working with me, in a colleague's own words.</p>
+    </div>
+    <div class="testimonial-card reveal">
+      <p class="testimonial-quote">I had the pleasure of managing Raid for nearly four years, and he was consistently one of the most reliable members of my team. Raid approaches every task with a high level of professionalism and possesses deep technical knowledge in his field. Whenever complex issues arose, his strong troubleshooting skills allowed him to quickly identify root causes and implement effective solutions. What truly sets Raid apart, however, is his proactive mindset — he never settles for just meeting expectations and is always looking for the next mile to deliver exceptional results. He would be a tremendous asset to any team.</p>
+      <a class="testimonial-person" href="https://www.linkedin.com/in/ruicordeiro?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener">
+        <div class="testimonial-avatar">RC</div>
+        <div>
+          <h4>Rui Cordeiro <span style="font-size:12px; color:var(--cyan); font-weight:500;">↗ LinkedIn</span></h4>
+          <p>Business Development Consultant at SATEC Arabia</p>
+        </div>
+      </a>
+      <div class="testimonial-badge"><span class="dot"></span>Rui managed Raid directly · May 2026</div>
     </div>
   </section>
 
