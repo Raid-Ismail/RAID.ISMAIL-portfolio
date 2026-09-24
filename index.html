@@ -1,924 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raid Ismail — Senior Network Engineer &amp; System Administrator</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Raid Ismail | Senior Network Engineer</title>
+<meta name="description" content="Senior Network Engineer with 7+ years in enterprise networks, firewalls and monitoring across Saudi Arabia and Sudan. Based in Dammam.">
+<meta property="og:title" content="Raid Ismail | Senior Network Engineer">
+<meta property="og:description" content="Enterprise networks, firewalls and monitoring. 7+ years across Saudi Arabia and Sudan.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌐%3C/text%3E%3C/svg%3E">
 <style>
-  :root{
-    --bg:#0a0a14; --bg-panel:#10101d; --bg-panel-2:#141425;
-    --indigo:#4b3df0; --indigo-soft:#6a5cff;
-    --pink:#ff2e88; --cyan:#23e5d3; --amber:#ffb444;
-    --text:#eeeef7; --text-dim:#9797ad; --line:rgba(255,255,255,0.09);
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; overflow-x:hidden; cursor:none;}
-  h1,h2,h3,h4{font-family:'Syne',sans-serif; font-weight:700; letter-spacing:-0.01em;}
-  a{color:inherit; text-decoration:none;}
-  ::selection{background:var(--pink); color:#0a0a14;}
-  img,svg{dlay:block;}
-
-  /* ============ noise overlay ============ */
-  #noise{
-    position:fixed; inset:0; z-index:2; pointer-events:none;
-    opacity:0.035; mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  /* ============ particle canvas ============ */
-  #bg-canvas{
-    position:fixed; inset:0; z-index:0;
-    background:
-      radial-gradient(ellipse 80% 60% at 20% 0%, rgba(75,61,240,0.16), transparent 60%),
-      radial-gradient(ellipse 70% 50% at 90% 20%, rgba(255,46,136,0.10), transparent 60%),
-      radial-gradient(ellipse 70% 60% at 50% 100%, rgba(35,229,211,0.08), transparent 60%),
-      var(--bg);
-  }
-
-  /* ============ cursor ============ */
-  #cursor-dot,#cursor-ring{position:fixed; top:0; left:0; pointer-events:none; z-index:9999; border-radius:50%; transform:translate(-50%,-50%); will-change:transform;}
-  #cursor-dot{width:6px;height:6px;background:var(--cyan); box-shadow:0 0 8px 2px rgba(35,229,211,.7); transition:opacity .2s ease;}
-  #cursor-ring{width:34px;height:34px;border:1.5px solid rgba(255,255,255,.35); transition:width .25s ease,height .25s ease,border-color .25s ease,background .25s ease;}
-  body.cursor-hover #cursor-ring{width:54px;height:54px;border-color:var(--pink); background:rgba(255,46,136,.08);}
-  body.cursor-down #cursor-ring{width:26px;height:26px;}
-  @media (hover:none),(pointer:coarse){ #cursor-dot,#cursor-ring{display:none;} body{cursor:auto;} }
-
-  /* ============ loader ============ */
-  #loader{
-    position:fixed; inset:0; z-index:10000;
-    background:var(--bg);
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px;
-    transition:opacity .6s ease, visibility .6s ease;
-  }
-  #loader.hide{opacity:0; visibility:hidden; pointer-events:none;}
-  .loader-initials{
-    font-family:'Syne',sans-serif; font-weight:800; font-size:64px;
-    background:linear-gradient(100deg, var(--indigo-soft), var(--pink), var(--cyan), var(--amber));
-    background-size:300% 100%;
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    animation:shimmer 2.4s linear infinite;
-  }
-  .loader-bar-track{width:220px; height:3px; border-radius:3px; background:rgba(255,255,255,.08); overflow:hidden;}
-  .loader-bar{
-    height:100%; width:0%;
-    background:linear-gradient(90deg, var(--indigo-soft), var(--pink), var(--cyan));
-    border-radius:3px;
-    animation:loadProgress 1.7s cubic-bezier(.3,.7,.3,1) forwards;
-  }
-  .loader-label{font-size:12px; letter-spacing:.08em; color:var(--text-dim);}
-  @keyframes loadProgress{ from{width:0%;} to{width:100%;} }
-  @keyframes shimmer{
-    0%{background-position:0% 50%;}
-    100%{background-position:300% 50%;}
-  }
-
-  /* ============ layout shell ============ */
-  .wrap{position:relative; z-index:1; max-width:1120px; margin:0 auto; padding:0 32px;}
-  section{padding:120px 0; border-bottom:1px solid var(--line); scroll-margin-top:76px;}
-  section:last-of-type{border-bottom:none;}
-  .sec-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:56px; flex-wrap:wrap; gap:16px;}
-  .sec-head h2{font-size:clamp(32px,4.4vw,48px);}
-  .sec-head p{color:var(--text-dim); max-width:340px; font-size:14.5px; line-height:1.6;}
-
-  /* ============ header / nav ============ */
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:200;
-    display:flex; justify-content:space-between; align-items:center;
-    padding:16px 32px;
-    background:rgba(10,10,20,0.55);
-    backdrop-filter:blur(14px) saturate(140%);
-    -webkit-backdrop-filter:blur(14px) saturate(140%);
-    border-bottom:1px solid var(--line);
-    transform:translateY(-100%);
-    animation:navDrop .8s cubic-bezier(.2,.8,.25,1) forwards;
-    animation-delay:1.9s;
-  }
-  @keyframes navDrop{ to{transform:translateY(0);} }
-  .brand{font-family:'Syne',sans-serif; font-weight:700; font-size:17px;}
-  .brand span{color:var(--pink);}
-  nav ul{list-style:none; display:flex; gap:34px; font-size:14px; color:var(--text-dim);}
-  nav a{position:relative; padding:4px 0;}
-  nav a::after{content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--cyan); transition:width .3s ease;}
-  nav a:hover{color:var(--text);}
-  nav a:hover::after{width:100%;}
-  @media (max-width:800px){ nav ul{display:none;} }
-
-  /* ============ hero ============ */
-  .hero{min-height:100vh; display:flex; align-items:center; padding-top:90px; border-bottom:1px solid var(--line);}
-  .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:60px; align-items:center; width:100%;}
-  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
-
-  .hero-kicker{
-    font-size:13.5px; color:var(--cyan); display:inline-flex; align-items:center; gap:10px;
-    margin-bottom:26px; padding:8px 16px; border:1px solid rgba(35,229,211,.25); border-radius:999px;
-    opacity:0; animation:riseIn .8s ease forwards; animation-delay:2.1s;
-  }
-  .hero-kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan); box-shadow:0 0 10px 2px rgba(35,229,211,.8); animation:pulse 2s ease-in-out infinite;}
-  @keyframes pulse{ 0%,100%{opacity:1; transform:scale(1);} 50%{opacity:.4; transform:scale(1.4);} }
-
-  h1.hero-title{
-    font-size:clamp(42px,6.4vw,78px); line-height:1.0;
-    opacity:0; animation:riseIn .9s ease forwards; animation-delay:2.22s;
-  }
-  h1.hero-title .shimmer{
-    background:linear-gradient(100deg, var(--indigo-soft), var(--pink) 35%, var(--amber) 55%, var(--cyan) 75%, var(--indigo-soft));
-    background-size:300% 100%;
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    animation:shimmer 5s linear infinite;
-  }
-  .hero-role{
-    font-family:'Syne',sans-serif; font-size:clamp(17px,2.1vw,23px); color:var(--text-dim);
-    margin-top:16px; font-weight:600;
-    opacity:0; animation:riseIn .9s ease forwards; animation-delay:2.34s;
-  }
-  .hero-desc{
-    max-width:540px; margin-top:24px; font-size:15.5px; line-height:1.75; color:var(--text-dim);
-    opacity:0; animation:riseIn .9s ease forwards; animation-delay:2.46s;
-  }
-  .hero-cta{margin-top:38px; display:flex; gap:18px; flex-wrap:wrap; opacity:0; animation:riseIn .9s ease forwards; animation-delay:2.58s;}
-  .btn{font-size:14px; font-weight:600; padding:15px 30px; border-radius:999px; display:inline-flex; align-items:center; gap:8px; transition:transform .35s cubic-bezier(.2,.9,.3,1), box-shadow .35s ease;}
-  .btn-primary{background:linear-gradient(100deg, var(--indigo), var(--pink)); color:#fff; box-shadow:0 8px 30px -8px rgba(255,46,136,.55);}
-  .btn-primary:hover{transform:translateY(-3px); box-shadow:0 14px 34px -8px rgba(255,46,136,.7);}
-  .btn-ghost{border:1px solid var(--line); color:var(--text);}
-  .btn-ghost:hover{border-color:var(--cyan); color:var(--cyan); transform:translateY(-3px);}
-  @keyframes riseIn{ from{opacity:0; transform:translateY(22px);} to{opacity:1; transform:translateY(0);} }
-
-  /* --- 3D floating card --- */
-  .card-stage{
-    position:relative; display:flex; align-items:center; justify-content:center; min-height:440px;
-    opacity:0; animation:riseIn 1s ease forwards; animation-delay:2.5s;
-    perspective:1000px;
-  }
-  .orb{
-    position:absolute; width:340px; height:340px; border-radius:50%;
-    background:radial-gradient(circle, rgba(255,46,136,.35), rgba(75,61,240,.2) 55%, transparent 75%);
-    filter:blur(20px);
-    animation:orbFloat 7s ease-in-out infinite;
-  }
-  @keyframes orbFloat{ 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-18px) scale(1.06);} }
-
-  .float-card{
-    position:relative; width:300px; background:var(--bg-panel); border:1px solid var(--line); border-radius:22px;
-    padding:34px 28px; text-align:center;
-    box-shadow:0 30px 70px -20px rgba(0,0,0,.6);
-    animation:cardFloat 6s ease-in-out infinite;
-    transform-style:preserve-3d;
-  }
-  @keyframes cardFloat{
-    0%,100%{transform:translateY(0) rotateX(4deg) rotateY(-6deg);}
-    50%{transform:translateY(-14px) rotateX(-2deg) rotateY(4deg);}
-  }
-  .avatar-ring-wrap{position:relative; width:110px; height:110px; margin:0 auto 20px;}
-  .avatar-ring{
-    position:absolute; inset:0; border-radius:50%;
-    border:2px dashed var(--cyan); opacity:.6;
-    animation:spin 14s linear infinite;
-  }
-  .avatar-ring.r2{inset:-10px; border-color:var(--pink); opacity:.35; animation-duration:20s; animation-direction:reverse;}
-  @keyframes spin{ to{transform:rotate(360deg);} }
-  .avatar-core{
-    position:absolute; inset:14px; border-radius:50%;
-    background:linear-gradient(140deg, var(--indigo), var(--pink));
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Syne',sans-serif; font-weight:800; font-size:26px; color:#fff;
-  }
-  .float-card h3{font-size:19px; margin-bottom:4px;}
-  .float-card p.role{font-size:13px; color:var(--text-dim); margin-bottom:24px;}
-  .card-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; border-top:1px solid var(--line); padding-top:22px;}
-  .card-stats b{display:block; font-family:'Syne',sans-serif; font-size:21px; color:var(--text);}
-  .card-stats span{font-size:11px; color:var(--text-dim);}
-
-  /* ============ marquee ============ */
-  .marquee-outer{
-    padding:34px 0; border-bottom:1px solid var(--line);
-    overflow:hidden;
-    -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  }
-  .marquee-track{display:flex; gap:64px; width:max-content; animation:scrollMarquee 32s linear infinite;}
-  .marquee-track span{
-    font-family:'Syne',sans-serif; font-size:15px; color:var(--text-dim);
-    white-space:nowrap; display:flex; align-items:center; gap:10px;
-  }
-  .marquee-track span::before{content:''; width:5px; height:5px; border-radius:50%; background:var(--amber);}
-  @keyframes scrollMarquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
-
-  /* ============ reveal ============ */
-  .reveal{opacity:0; transform:translateY(30px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.3,1);}
-  .reveal.in{opacity:1; transform:translateY(0);}
-  .reveal-left{opacity:0; transform:translateX(-40px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.3,1);}
-  .reveal-left.in{opacity:1; transform:translateX(0);}
-  .reveal-right{opacity:0; transform:translateX(40px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.3,1);}
-  .reveal-right.in{opacity:1; transform:translateX(0);}
-
-  /* ============ skills ============ */
-  .skills-layout{display:grid; grid-template-columns:1fr 1fr; gap:70px;}
-  @media (max-width:850px){ .skills-layout{grid-template-columns:1fr;} }
-  .skill-row{margin-bottom:22px;}
-  .skill-row:last-child{margin-bottom:0;}
-  .skill-row-top{display:flex; justify-content:space-between; font-size:14px; margin-bottom:9px;}
-  .skill-row-top span:first-child{color:var(--text);}
-  .skill-row-top span:last-child{color:var(--text-dim); font-size:12.5px;}
-  .skill-bar-track{height:8px; border-radius:6px; background:rgba(255,255,255,.06); overflow:hidden; position:relative;}
-  .skill-bar-fill{
-    height:100%; width:0%; border-radius:6px; position:relative; overflow:hidden;
-    transition:width 1.3s cubic-bezier(.2,.8,.2,1);
-  }
-  .skill-bar-fill.c1{background:linear-gradient(90deg, var(--indigo), var(--indigo-soft));}
-  .skill-bar-fill.c2{background:linear-gradient(90deg, var(--pink), #ff6fb0);}
-  .skill-bar-fill.c3{background:linear-gradient(90deg, var(--cyan), #7cf3e6);}
-  .skill-bar-fill.c4{background:linear-gradient(90deg, var(--amber), #ffd08a);}
-  .skill-bar-fill::after{
-    content:''; position:absolute; top:0; left:-40%; width:40%; height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
-    opacity:0;
-  }
-  .skill-bar-fill.swept::after{ animation:sweep 1.1s ease forwards; animation-delay:1.1s; }
-  @keyframes sweep{ 0%{left:-40%; opacity:0;} 15%{opacity:1;} 100%{left:110%; opacity:0;} }
-
-  .chip-title{font-size:14px; color:var(--amber); margin-bottom:18px; font-family:'Syne',sans-serif;}
-  .skills-cloud{display:flex; flex-wrap:wrap; gap:12px;}
-  .skill-chip{
-    border:1px solid var(--line); padding:11px 19px; border-radius:999px; font-size:13.5px; color:var(--text-dim);
-    background:var(--bg-panel); transition:transform .3s cubic-bezier(.2,.9,.3,1), color .3s ease, border-color .3s ease;
-  }
-  .skill-chip:nth-child(4n+1):hover{border-color:var(--indigo-soft); color:var(--indigo-soft);}
-  .skill-chip:nth-child(4n+2):hover{border-color:var(--pink); color:var(--pink);}
-  .skill-chip:nth-child(4n+3):hover{border-color:var(--cyan); color:var(--cyan);}
-  .skill-chip:nth-child(4n+4):hover{border-color:var(--amber); color:var(--amber);}
-  .skill-chip:hover{transform:translateY(-6px);}
-
-  /* ============ experience timeline ============ */
-  .timeline{position:relative; padding-left:36px;}
-  .timeline::before{
-    content:''; position:absolute; left:5px; top:6px; bottom:6px; width:2px;
-    background:linear-gradient(var(--indigo-soft), var(--pink), var(--cyan), var(--amber));
-    background-size:100% 300%;
-    animation:gradFlow 6s linear infinite;
-    opacity:.65; border-radius:2px;
-  }
-  @keyframes gradFlow{ 0%{background-position:0 0;} 100%{background-position:0 100%;} }
-  .job{position:relative; padding-bottom:60px; transition:transform .4s cubic-bezier(.2,.8,.3,1);}
-  .job:last-child{padding-bottom:0;}
-  .job:hover{transform:translateX(10px);}
-  .job::before{content:''; position:absolute; left:-36px; top:6px; width:11px; height:11px; border-radius:50%; background:var(--bg); border:2px solid var(--cyan); box-shadow:0 0 0 4px rgba(35,229,211,.12); transition:box-shadow .4s ease;}
-  .job:hover::before{box-shadow:0 0 0 7px rgba(35,229,211,.22);}
-  .job.current::before{background:var(--pink); border-color:var(--pink); box-shadow:0 0 0 5px rgba(255,46,136,.18);}
-  .job.current:hover::before{box-shadow:0 0 0 8px rgba(255,46,136,.28);}
-  .job-card{border-radius:16px; padding:26px 28px; border:1px solid transparent; transition:border-color .4s ease, box-shadow .4s ease, background .4s ease;}
-  .job:hover .job-card{border-color:var(--line); background:rgba(255,255,255,.02); box-shadow:0 20px 50px -25px rgba(35,229,211,.25);}
-  .job-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:4px;}
-  .job-top h3{font-size:20px;}
-  .job-date{font-size:12px; color:var(--bg); background:var(--cyan); padding:5px 12px; border-radius:999px; white-space:nowrap; font-weight:600;}
-  .job.current .job-date{background:var(--pink);}
-  .job-sub{font-size:13.5px; color:var(--text-dim); margin-bottom:14px; font-style:italic;}
-  .job ul{list-style:none; display:grid; gap:8px; margin-bottom:16px;}
-  .job li{font-size:14px; line-height:1.6; color:#c5c5d8; padding-left:18px; position:relative;}
-  .job li::before{content:''; position:absolute; left:0; top:8px; width:5px; height:5px; border-radius:50%; background:var(--amber);}
-  .badge-row{display:flex; flex-wrap:wrap; gap:8px;}
-  .badge{font-size:11px; padding:5px 11px; border-radius:7px; border:1px solid var(--line); color:var(--text-dim); background:rgba(255,255,255,.03);}
-
-  /* ============ projects ============ */
-  .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-  @media (max-width:900px){ .proj-grid{grid-template-columns:1fr 1fr;} }
-  @media (max-width:620px){ .proj-grid{grid-template-columns:1fr;} }
-  .proj-card{
-    position:relative; border:1px solid var(--line); border-radius:18px; padding:30px 26px;
-    background:var(--bg-panel); overflow:hidden;
-    transition:transform .4s cubic-bezier(.2,.8,.3,1), box-shadow .4s ease;
-  }
-  .proj-card::before{
-    content:''; position:absolute; top:0; left:-100%; width:100%; height:3px;
-    background:linear-gradient(90deg, var(--indigo-soft), var(--pink), var(--cyan), var(--amber));
-    transition:left .5s ease;
-  }
-  .proj-card:hover{transform:translateY(-8px); box-shadow:0 24px 50px -20px rgba(0,0,0,.55);}
-  .proj-card:hover::before{left:0;}
-  .proj-emoji{font-size:32px; margin-bottom:18px; display:block;}
-  .proj-card h3{font-size:18px; margin-bottom:10px;}
-  .proj-card p{font-size:13.5px; line-height:1.65; color:var(--text-dim); margin-bottom:18px;}
-  .proj-tags{display:flex; flex-wrap:wrap; gap:7px;}
-  .proj-tags span{font-size:11px; padding:5px 11px; border-radius:7px; background:rgba(255,255,255,.04); border:1px solid var(--line); color:var(--text-dim);}
-
-  /* ============ education / languages ============ */
-  .split{display:grid; grid-template-columns:1fr 1fr; gap:64px;}
-  @media (max-width:800px){ .split{grid-template-columns:1fr;} }
-  .edu-block{border:1px solid var(--line); border-radius:18px; padding:28px; background:var(--bg-panel); margin-bottom:20px;}
-  .edu-block h3{font-size:18px; margin-bottom:4px;}
-  .edu-block .edu-sub{color:var(--cyan); font-size:13px; margin-bottom:16px;}
-  .course-tags{display:flex; flex-wrap:wrap; gap:8px;}
-  .course-tags span{font-size:12px; padding:6px 12px; border-radius:8px; background:rgba(255,255,255,.04); border:1px solid var(--line); color:var(--text-dim);}
-
-  .cert-list{display:grid; gap:12px; margin-bottom:36px;}
-  .cert-item{display:flex; justify-content:space-between; align-items:center; border:1px solid var(--line); border-radius:14px; padding:16px 20px; background:var(--bg-panel); transition:border-color .3s ease, transform .3s ease;}
-  .cert-item:hover{border-color:var(--amber); transform:translateX(4px);}
-  .cert-item h4{font-size:13.5px; font-weight:600; font-family:'DM Sans',sans-serif;}
-  .cert-item span{font-size:12px; color:var(--text-dim); white-space:nowrap; margin-left:14px;}
-
-  .lang-title{font-size:14px; color:var(--amber); margin-bottom:18px; font-family:'Syne',sans-serif;}
-  .lang-badges{display:flex; gap:14px; flex-wrap:wrap;}
-  .lang-badge{
-    border:1px solid var(--line); border-radius:14px; padding:18px 22px; min-width:150px; background:var(--bg-panel);
-    position:relative; overflow:hidden;
-  }
-  .lang-badge h4{font-size:15px; margin-bottom:8px;}
-  .lang-badge .lvl-track{height:6px; border-radius:5px; background:rgba(255,255,255,.07); overflow:hidden; margin-bottom:6px;}
-  .lang-badge .lvl-fill{height:100%; border-radius:5px;}
-  .lang-badge.ar .lvl-fill{background:linear-gradient(90deg, var(--pink), var(--amber)); width:98%;}
-  .lang-badge.en .lvl-fill{background:linear-gradient(90deg, var(--cyan), var(--indigo-soft)); width:82%;}
-  .lang-badge span{font-size:11.5px; color:var(--text-dim);}
-  .note-inline{font-size:12px; color:var(--text-dim); margin-top:14px; font-style:italic;}
-
-  /* ============ contact ============ */
-  .contact-layout{display:grid; grid-template-columns:1fr .85fr; gap:70px; align-items:center;}
-  @media (max-width:850px){ .contact-layout{grid-template-columns:1fr;} }
-  .contact-info h2{font-size:clamp(32px,4.6vw,50px); margin-bottom:36px; line-height:1.1;}
-  .contact-info h2 .grad{background:linear-gradient(100deg, var(--cyan), var(--indigo-soft)); -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .contact-card{
-    display:flex; align-items:center; gap:16px; border:1px solid var(--line); border-radius:14px; padding:18px 22px;
-    background:var(--bg-panel); margin-bottom:14px; transition:transform .3s ease, border-color .3s ease;
-  }
-  .contact-card:hover{transform:translateX(8px); border-color:var(--pink);}
-  .contact-card .ic{width:38px; height:38px; border-radius:10px; background:linear-gradient(140deg, var(--indigo), var(--pink)); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;}
-  .contact-card p:first-child{font-size:11.5px; color:var(--text-dim); margin-bottom:3px;}
-  .contact-card p:last-child{font-size:14.5px; font-weight:600;}
-
-  .ripple-stage{position:relative; display:flex; align-items:center; justify-content:center; min-height:340px;}
-  .ripple{position:absolute; width:150px; height:150px; border-radius:50%; border:1.5px solid var(--cyan); opacity:0; animation:rippleGo 3.2s ease-out infinite;}
-  .ripple:nth-child(2){animation-delay:1.05s; border-color:var(--pink);}
-  .ripple:nth-child(3){animation-delay:2.1s; border-color:var(--amber);}
-  @keyframes rippleGo{ 0%{transform:scale(.6); opacity:.7;} 100%{transform:scale(2.6); opacity:0;} }
-  .ripple-core{
-    position:relative; width:150px; height:150px; border-radius:50%;
-    background:linear-gradient(140deg, var(--indigo), var(--pink));
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Syne',sans-serif; font-weight:800; font-size:40px; color:#fff;
-    animation:corePulse 2.6s ease-in-out infinite;
-    box-shadow:0 0 60px -6px rgba(255,46,136,.5);
-  }
-  @keyframes corePulse{ 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
-
-  footer{padding:34px 0 46px; text-align:center; font-size:13px; color:var(--text-dim);}
-
-  ::-webkit-scrollbar{width:9px;}
-  ::-webkit-scrollbar-track{background:var(--bg);}
-  ::-webkit-scrollbar-thumb{background:linear-gradient(var(--indigo-soft), var(--pink)); border-radius:10px;}
-  ::-webkit-scrollbar-thumb:hover{background:linear-gradient(var(--pink), var(--cyan));}
-
-  /* ============ testimonial ============ */
-  .testimonial-card{
-    position:relative; border:1px solid var(--line); border-radius:22px;
-    background:var(--bg-panel); padding:44px 40px; max-width:760px; margin:0 auto;
-    overflow:hidden;
-  }
-  .testimonial-card::before{
-    content:'"'; position:absolute; top:-10px; left:24px; font-family:'Syne',sans-serif;
-    font-size:140px; line-height:1; color:transparent;
-    background:linear-gradient(160deg, var(--indigo-soft), var(--pink));
-    -webkit-background-clip:text; background-clip:text; opacity:.25;
-  }
-  .testimonial-quote{
-    position:relative; font-size:18px; line-height:1.8; color:#d8d8ea; margin-bottom:30px;
-  }
-  .testimonial-person{display:flex; align-items:center; gap:16px; width:fit-content; transition:transform .3s ease;}
-  .testimonial-person:hover{transform:translateX(6px);}
-  .testimonial-person:hover .testimonial-avatar{box-shadow:0 0 0 4px rgba(35,229,211,.18);}
-  .testimonial-avatar{
-    width:52px; height:52px; border-radius:50%; flex-shrink:0;
-    background:linear-gradient(140deg, var(--indigo), var(--pink));
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Syne',sans-serif; font-weight:800; font-size:18px; color:#fff;
-    transition:box-shadow .3s ease;
-  }
-  .testimonial-person h4{font-size:16px; margin-bottom:3px;}
-  .testimonial-person p{font-size:13px; color:var(--text-dim); line-height:1.5;}
-  .testimonial-badge{
-    display:inline-flex; align-items:center; gap:7px; font-size:12px; color:var(--cyan);
-    margin-top:14px; padding:6px 14px; border:1px solid rgba(35,229,211,.25); border-radius:999px;
-  }
-  .testimonial-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan); box-shadow:0 0 8px 2px rgba(35,229,211,.7);}
-
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
-  }
+:root{--bg:#eef2f4;--surface:#fff;--ink:#14232b;--muted:#51636d;--line:#cfd8dd;--blue:#1f5fbf;--orange:#c2410c;--led:#1a9e5c;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a20;--surface:#16252d;--ink:#e8eef1;--muted:#9fb1ba;--line:#2a3d47;--blue:#6ea3f0;--orange:#f29a6b;--led:#3ddc84}}
+:root[data-theme="dark"]{--bg:#0f1a20;--surface:#16252d;--ink:#e8eef1;--muted:#9fb1ba;--line:#2a3d47;--blue:#6ea3f0;--orange:#f29a6b;--led:#3ddc84}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;line-height:1.2;margin:0}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+nav .wrap{display:flex;gap:18px;align-items:center;height:56px;overflow-x:auto;white-space:nowrap}
+nav b{font-family:Georgia,serif;margin-right:auto}
+nav a{text-decoration:none;color:var(--muted);font-size:15px}
+nav a:hover{color:var(--ink)}
+.tg{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center;padding:0}
+.tg:hover{border-color:var(--blue)}
+.tg svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+h2{font-size:30px;margin-bottom:8px}
+.sub{color:var(--muted);margin:0 0 28px;max-width:60ch}
+.hero{padding:64px 0 48px}
+.hero h1{font-size:clamp(38px,8vw,64px);margin-bottom:12px}
+.hero p{max-width:58ch;color:var(--muted);font-size:19px}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:600;border:2px solid var(--blue)}
+.btn.p{background:var(--blue);color:var(--bg)}
+.two{display:grid;gap:32px;grid-template-columns:1.4fr 1fr}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:15px}
+dt{color:var(--muted)}dd{margin:0}
+.lvl{display:grid;gap:14px}
+.lvl div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.lvl h3{font-size:18px;margin-bottom:6px}
+.lvl p{margin:0;font-size:16px}
+.tools{margin-top:20px;color:var(--muted);font-size:15px}
+.job{border-left:3px solid var(--blue);padding:0 0 28px 20px;margin-left:4px;position:relative}
+.job::before{content:"";position:absolute;left:-8px;top:6px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--blue)}
+.job h3{font-size:21px}
+.meta{color:var(--muted);font-size:15px;margin:2px 0 10px}
+.job ul,.work ul{margin:0;padding-left:20px}
+.job li{margin-bottom:6px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.work{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px}
+.work svg{width:28px;height:28px;stroke:var(--blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-bottom:10px}
+.work h3{font-size:19px;margin-bottom:6px}
+.work p{margin:0;font-size:16px;color:var(--muted)}
+.certs{columns:2;gap:32px;padding-left:20px;margin:0}
+.contact h2{margin-bottom:18px}
+.contact a.big{font-size:22px;display:block;margin:6px 0}
+.quote{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:28px 24px;margin:0}
+.quote p{font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-size:19px;line-height:1.7;margin:0 0 24px;max-width:66ch}
+.quote footer{display:flex;gap:14px;align-items:center;padding:0;color:var(--ink);font-size:16px}
+.av{flex:none;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#6d3fd6,#d63a8c);color:#fff;display:grid;place-items:center;font-weight:700}
+.quote small{display:block;color:var(--muted);font-size:14px}
+.tag{display:inline-block;margin-top:18px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--muted)}
+body>footer{padding:28px 0;color:var(--muted);font-size:14px}
+@media(max-width:700px){.two{grid-template-columns:1fr}.certs{columns:1}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
+<nav><div class="wrap"><b>Raid Ismail</b>
+<a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#work">Work</a><a href="#credentials">Credentials</a><a href="#recommendation">Recommendation</a><a href="#contact">Contact</a><button id="theme" class="tg" type="button" aria-label="Switch to dark mode"></button></div></nav>
 
-<div id="loader">
-  <div class="loader-initials">RI</div>
-  <div class="loader-bar-track"><div class="loader-bar"></div></div>
-  <div class="loader-label">LOADING PORTFOLIO</div>
-</div>
-
-<canvas id="bg-canvas"></canvas>
-<div id="noise"></div>
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
-
-<header>
-  <div class="brand">Raid<span>.</span>Ismail</div>
-  <nav>
-    <ul>
-      <li><a href="#about" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth',block:'start'});return false;">About</a></li>
-      <li><a href="#skills" onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth',block:'start'});return false;">Skills</a></li>
-      <li><a href="#experience" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth',block:'start'});return false;">Experience</a></li>
-      <li><a href="#projects" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth',block:'start'});return false;">Projects</a></li>
-      <li><a href="#education" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth',block:'start'});return false;">Education</a></li>
-      <li><a href="#testimonial" onclick="document.getElementById('testimonial').scrollIntoView({behavior:'smooth',block:'start'});return false;">Recommendation</a></li>
-      <li><a href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth',block:'start'});return false;">Contact</a></li>
-    </ul>
-  </nav>
+<main class="wrap">
+<header class="hero">
+<h1>Raid Ismail</h1>
+<p><strong>Senior Network Engineer.</strong> Seven years designing, securing and troubleshooting enterprise networks in Saudi Arabia and Sudan. I keep systems available, keep logs accurate and keep stakeholders informed.</p>
+<div class="btns"><a class="btn p" href="#experience">View experience</a><a class="btn" href="#contact">Contact me</a></div>
 </header>
 
-<div class="wrap">
+<section id="about"><h2>About</h2>
+<div class="two"><div>
+<p>Since 2018 I have moved between network engineer and system administrator roles in Sudan and Saudi Arabia. Each role taught me something technical and something human: explaining an outage to a stakeholder, briefing a vendor, handing a project cleanly to the next team.</p>
+<p>I am a Senior Network Engineer at SATEC in Ras Al Khair, on the International Maritime Industry project. I help set technical direction, watch network and firewall health, and keep a large group of data centers running.</p></div>
+<dl><dt>Location</dt><dd>Dammam, Saudi Arabia</dd><dt>Employer</dt><dd>SATEC, Ras Al Khair</dd><dt>Degree</dt><dd>B.Sc. Information Technology</dd><dt>Languages</dt><dd>Arabic (native), English (professional)</dd></dl></div></section>
 
-  <section class="hero" id="top">
-    <div class="hero-grid">
-      <div>
-        <div class="hero-kicker"><span class="dot"></span>Dammam, KSA</div>
-        <p class="hero-role">Senior Network Engineer &amp; System Administrator</p>
-        <p class="hero-desc">Seven-plus years designing, securing, and troubleshooting enterprise infrastructure — from maritime-industry data centers to city-wide fiber links. I keep systems available, keep logs honest, and keep stakeholders in the loop.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#experience" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth',block:'start'});return false;">My Professional Experience</a>
-          <a class="btn btn-ghost" href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth',block:'start'});return false;">Contact Me</a>
-        </div>
-      </div>
-      <div class="card-stage">
-        <div class="orb"></div>
-        <div class="float-card">
-          <div class="avatar-ring-wrap">
-            <div class="avatar-ring"></div>
-            <div class="avatar-ring r2"></div>
-            <div class="avatar-core">RI</div>
-          </div>
-          <h3>Raid Ismail</h3>
-          <p class="role">Senior Network Engineer</p>
-          <div class="card-stats">
-            <div><b>7+</b><span>Years</span></div>
-            <div><b>6</b><span>Roles</span></div>
-            <div><b>10+</b><span>Certs</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="skills"><h2>Skills</h2>
 
-  <div class="marquee-outer" style="max-width:100%;">
-    <div class="marquee-track" id="marquee">
-      <!-- populated / duplicated by JS -->
-    </div>
-  </div>
+<div class="lvl">
+<div><h3>Core, used daily</h3><p>LAN/WAN, routing and switching. Firewalls (Cisco, Palo Alto, Fortinet). Monitoring and incident response. Documentation and stakeholder reporting.</p></div>
+<div><h3>Solid</h3><p>Windows Server and Active Directory. VoIP and unified communications.</p></div>
+<div><h3>Working knowledge</h3><p>CCTV, access control and time attendance systems.</p></div></div>
+<p class="tools">Platforms: Cisco, Palo Alto, Fortinet (FortiGate, FortiAnalyzer), Huawei, Zabbix, Elastic, Hikvision, Windows Server, Active Directory.</p></section>
 
-  <section id="about">
-    <div class="sec-head reveal">
-      <h2>About</h2>
-      
-    </div>
-    <div class="skills-layout">
-      <div class="reveal-left">
-        <p style="font-size:17px; line-height:1.85; color:#cfcfe0;">I've spent more than seven years in IT support and network &amp; system administration, moving between Network Engineer and System Administrator roles across Sudan and Saudi Arabia. Each position sharpened both the technical side of the job and the human side — talking a stakeholder through an outage, briefing a vendor, or handing a project cleanly to the next team.</p>
-        <p style="font-size:17px; line-height:1.85; color:#cfcfe0; margin-top:20px;">Right now I'm a Senior Network Engineer at SATEC in Ras Elkhair, working inside the International Maritime Industry project — setting technical strategy, monitoring performance across firewalls and network systems, and keeping a large group of data centers and peripheral devices running end to end.</p>
-      </div>
-      <div class="reveal-right" style="background:var(--bg-panel); border:1px solid var(--line); border-radius:18px; padding:30px;">
-        <h4 style="font-size:14px; color:var(--amber); margin-bottom:18px;">Quick facts</h4>
-        <ul style="list-style:none;">
-          <li style="display:flex; justify-content:space-between; padding:11px 0; font-size:14.5px;"><span style="color:var(--text-dim);">Location</span><span>Dammam, Saudi Arabia</span></li>
-          <li style="display:flex; justify-content:space-between; padding:11px 0; border-top:1px solid var(--line); font-size:14.5px;"><span style="color:var(--text-dim);">Current role</span><span>Senior Network Engineer</span></li>
-          <li style="display:flex; justify-content:space-between; padding:11px 0; border-top:1px solid var(--line); font-size:14.5px;"><span style="color:var(--text-dim);">Employer</span><span>SATEC, Ras Elkhair</span></li>
-          <li style="display:flex; justify-content:space-between; padding:11px 0; border-top:1px solid var(--line); font-size:14.5px;"><span style="color:var(--text-dim);">Degree</span><span>B.Sc. Information Technology</span></li>
-          <li style="display:flex; justify-content:space-between; padding:11px 0; border-top:1px solid var(--line); font-size:14.5px;"><span style="color:var(--text-dim);">Email</span><span>Raidmoh22@gmail.com</span></li>
-          <li style="display:flex; justify-content:space-between; padding:11px 0; border-top:1px solid var(--line); font-size:14.5px;"><span style="color:var(--text-dim);">Phone</span><span>00966 558 501 545</span></li>
-          <li style="display:flex; justify-content:space-between; padding:11px 0; border-top:1px solid var(--line); font-size:14.5px;"><span style="color:var(--text-dim);">LinkedIn</span><span>Raid Ismail</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
+<section id="experience"><h2>Experience</h2>
 
-  <section id="skills">
-    <div class="sec-head reveal">
-      <h2>Skills</h2>
-    
-    </div>
-    <div class="skills-layout">
-      <div id="skillbars">
-        <div class="skill-row">
-          <div class="skill-row-top"><span>Networking (LAN/WAN, routing &amp; switching)</span><span>95%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill c1" data-pct="95"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-row-top"><span>Firewall &amp; Network Security (Cisco, PaloAlto, Fortinet)</span><span>92%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill c2" data-pct="92"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-row-top"><span>Monitoring &amp; Incident Response (Zabbix, NNMi, Elastic)</span><span>90%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill c3" data-pct="90"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-row-top"><span>System Administration (Windows Server, Active Directory)</span><span>85%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill c4" data-pct="85"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-row-top"><span>VoIP &amp; Unified Communications (Cisco Control)</span><span>82%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill c1" data-pct="82"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-row-top"><span>CCTV, Access Control &amp; Time Attendance Systems</span><span>78%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill c2" data-pct="78"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-row-top"><span>Reporting, Documentation &amp; Stakeholder Communication</span><span>88%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill c3" data-pct="88"></div></div>
-        </div>
-      </div>
-      <div class="reveal-right">
-        <h4 class="chip-title">Tools &amp; technologies</h4>
-        <div class="skills-cloud">
-          <span class="skill-chip">Cisco</span>
-          <span class="skill-chip">PaloAlto</span>
-          <span class="skill-chip">Fortinet FortiGate</span>
-          <span class="skill-chip">FortiAnalyzer</span>
-          <span class="skill-chip">Huawei eSight</span>
-          <span class="skill-chip">CompusInsight</span>
-          <span class="skill-chip">Zabbix</span>
-          <span class="skill-chip">NNMi</span>
-          <span class="skill-chip">mRemoteNG</span>
-          <span class="skill-chip">OpManager</span>
-          <span class="skill-chip">Elastic</span>
-          <span class="skill-chip">Hikvision CCTV</span>
-          <span class="skill-chip">Windows Server</span>
-          <span class="skill-chip">Active Directory</span>
-          <span class="skill-chip">VoIP</span>
-          <span class="skill-chip">Fiber &amp; WAN Links</span>
-          <span class="skill-chip">DHCP &amp; IP Management</span>
-          <span class="skill-chip">Network Automation (NOM)</span>
-          <span class="skill-chip">CASP+ CompTIA Advanced Security (CAS-004)</span>
-          <span class="skill-chip">ISC2</span>
-          <span class="skill-chip">Linux RedHat</span>
-          <span class="skill-chip">Linux Ubuntu</span>
 
-        </div>
-      </div>
-    </div>
-  </section>
+<article class="job"><h3>Senior Network Engineer</h3><p class="meta">SATEC, Ras Al Khair, Saudi Arabia. 2022 to present</p><ul>
+<li>Define future network needs and technical direction for the International Maritime Industry project.</li>
+<li>Monitor performance and diagnose faults across network systems and firewalls.</li>
+<li>Run a large group of data centers and their connected devices, including wireless, VoIP, cameras and access control.</li>
+<li>Keep IP addressing and network-wide device logs visible and searchable.</li>
+<li>Connect industrial-city buildings over fiber, and configure, test and maintain Cisco and Palo Alto firewalls, LAN/WAN and VoIP platforms.</li></ul></article>
 
-  <section id="experience">
-    <div class="sec-head reveal">
-      <h2>Experience</h2>
-    
-    </div>
-    <div class="timeline">
+<article class="job"><h3>Network and System Administrator</h3><p class="meta">Dora Najd Resort, Riyadh. 2021 to 2022</p><ul>
+<li>Resolved network and system complaints, and ran backups and system protection.</li>
+<li>Tracked incidents and secured the network against breaches.</li>
+<li>Managed data center components and put corrective plans in place for availability and latency.</li>
+<li>Designed WAN/LAN connectivity for business-critical applications.</li></ul></article>
 
-      <div class="job current reveal">
-        <div class="job-card">
-          <div class="job-top"><h3>Senior Network Engineer</h3><span class="job-date">2022 — Current</span></div>
-          <div class="job-sub">SATEC · Ras Elkhair, Saudi Arabia</div>
-          <ul>
-            <li>Work within the International Maritime Industry (IMI) project, defining future network needs and setting technical strategy.</li>
-            <li>Monitor and analyze performance and problems across network systems and firewalls via Zabbix and NNMi.</li>
-            <li>Manage a large group of data centers using mRemoteNG and Network Automation (NOM).</li>
-            <li>Manage peripheral devices — access points, surveillance cameras, and traffic control — via Huawei access control and Hikvision.</li>
-            <li>Manage VoIP through Cisco Control; monitor network systems via Huawei eSight and wireless via CompusInsight.</li>
-            <li>Monitor all IP/DHCP via OpManager and device logs network-wide via Elastic; connect industrial-city buildings via fiber.</li>
-            <li>Work on Cisco and PaloAlto firewalls; configure, test, and maintain LAN/WAN and VoIP platforms.</li>
-          </ul>
-          <div class="badge-row"><span class="badge">Firewall</span><span class="badge">VoIP</span><span class="badge">Fiber</span><span class="badge">SIEM/Logs</span><span class="badge">Data Centers</span></div>
-        </div>
-      </div>
+<article class="job"><h3>Network Engineer</h3><p class="meta">Aswar Company for Multi-border Activities, Khartoum. 2020 to 2021</p><ul>
+<li>Led site surveys and built network infrastructure for company projects.</li>
+<li>Configured switches, access points, firewalls and servers, and maintained Active Directory.</li>
+<li>Reduced user complaints by improving performance, and produced network diagrams.</li>
+<li>Led technician teams from installation through final delivery.</li></ul></article>
 
-      <div class="job reveal">
-        <div class="job-card">
-          <div class="job-top"><h3>Network and System Administrator</h3><span class="job-date">2021 — 2022</span></div>
-          <div class="job-sub">Dora Najd Resort · Riyadh, Saudi Arabia</div>
-          <ul>
-            <li>Provided technical support for all network and systems complaints.</li>
-            <li>Carried out maintenance including data backups and system protection.</li>
-            <li>Secured the network and tracked incidents to handle breaches.</li>
-            <li>Managed data center components and implemented corrective plans for availability and latency.</li>
-            <li>Designed WAN/LAN connectivity for large-scale, business-critical applications.</li>
-          </ul>
-          <div class="badge-row"><span class="badge">Security</span><span class="badge">Backups</span><span class="badge">WAN/LAN</span></div>
-        </div>
-      </div>
+<article class="job"><h3>Network Manager</h3><p class="meta">CIN Trading, Khartoum. 2019 to 2021</p><ul>
+<li>Directed the purchase, installation and testing of network hardware.</li>
+<li>Configured switches, routers, access points and firewalls, and troubleshot user-reported faults.</li></ul></article>
 
-      <div class="job reveal">
-        <div class="job-card">
-          <div class="job-top"><h3>Network Engineer</h3><span class="job-date">2020 — 2021</span></div>
-          <div class="job-sub">Aswar Company For Multi-border Activities · Khartoum, Sudan</div>
-          <ul>
-            <li>Led site surveys and built network infrastructure for company projects.</li>
-            <li>Configured switches, access points, firewalls, and servers; maintained Active Directory.</li>
-            <li>Improved network performance and reduced complaints; produced network diagrams.</li>
-            <li>Led teams of technicians through installation projects to final delivery.</li>
-          </ul>
-          <div class="badge-row"><span class="badge">Active Directory</span><span class="badge">Team Lead</span><span class="badge">Site Survey</span></div>
-        </div>
-      </div>
+<article class="job"><h3>Network Engineer</h3><p class="meta">Sudan Internet Society, Khartoum. 2019</p><ul>
+<li>Installed and commissioned devices for a network modernization.</li>
+<li>Calculated and distributed IP address ranges.</li></ul></article>
 
-      <div class="job reveal">
-        <div class="job-card">
-          <div class="job-top"><h3>Network Manager</h3><span class="job-date">2019 — 2021</span></div>
-          <div class="job-sub">CIN Trading · Khartoum, Sudan</div>
-          <ul>
-            <li>Directed acquisition, installation, and testing of network hardware.</li>
-            <li>Configured switches, routers, access points, and firewalls.</li>
-            <li>Provided debugging and troubleshooting for user-reported faults.</li>
-          </ul>
-          <div class="badge-row"><span class="badge">Procurement</span><span class="badge">Troubleshooting</span></div>
-        </div>
-      </div>
+<article class="job"><h3>Network Engineer Intern</h3><p class="meta">AZ Technology, Khartoum. 2018</p><ul>
+<li>Installed and maintained data and voice circuits across routers, switches and WAN devices.</li>
+<li>Supported and troubleshot WAN/LAN connectivity.</li></ul></article></section>
 
-      <div class="job reveal">
-        <div class="job-card">
-          <div class="job-top"><h3>Network Engineer</h3><span class="job-date">2019</span></div>
-          <div class="job-sub">Sudan Internet Society · Khartoum, Sudan</div>
-          <ul>
-            <li>Installed and commissioned devices for a modern network build-out.</li>
-            <li>Handled calculation and distribution of IP addresses.</li>
-          </ul>
-          <div class="badge-row"><span class="badge">IP Addressing</span><span class="badge">Commissioning</span></div>
-        </div>
-      </div>
+<section id="work"><h2>Selected work</h2>
 
-      <div class="job reveal">
-        <div class="job-card">
-          <div class="job-top"><h3>Network Engineer Intern</h3><span class="job-date">2018</span></div>
-          <div class="job-sub">AZ Technology · Khartoum, Sudan</div>
-          <ul>
-            <li>Installed and maintained data and voice circuits through routers, switches, and WAN devices.</li>
-            <li>Provided network support and troubleshooting for WAN/LAN connectivity issues.</li>
-          </ul>
-          <div class="badge-row"><span class="badge">WAN/LAN</span><span class="badge">Internship</span></div>
-        </div>
-      </div>
+<div class="grid">
+<div class="work"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg><h3>Fiber links across an industrial city</h3><p>Connected buildings over fiber and kept the LAN/WAN behind them firewalled and maintained.</p></div>
+<div class="work"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg><h3>Network-wide monitoring and logs</h3><p>Central visibility of performance, IP usage and device logs, so faults are found early.</p></div>
+<div class="work"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.500-1-8-4-8-9V6z"/></svg><h3>Security at a resort network</h3><p>Secured the network, tracked incidents and applied corrective plans for availability and latency.</p></div>
+<div class="work"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/><path d="M7 7h.01M7 17h.01"/></svg><h3>Build-out from survey to handover</h3><p>Led site surveys, installation teams and network diagrams for new infrastructure.</p></div></div></section>
 
-    </div>
-  </section>
+<section id="credentials"><h2>Education and certifications</h2>
+<p class="sub">B.Sc. Information Technology, Mashreq University, Sudan, 2015 to 2019.</p>
+<div class="two"><div><h3>Cisco and others</h3><ul class="certs" style="columns:1;margin-top:10px">
+<li>CCNP Security (Oct 2023)</li><li>Cisco Certified Specialist, Network Security VPN (Oct 2023)</li><li>Cisco Certified Specialist, Network Security Core (Aug 2023)</li><li>CCNP ENARSI, CCNA Security, CCNA Voice, CCNA R&amp;S</li><li>HCIA, CCTV, MCSE 2016</li></ul></div>
+<div><h3>Fortinet</h3><ul class="certs" style="columns:1;margin-top:10px">
+<li>NSE 1: Information Security Awareness (Mar 2023)</li><li>NSE 2: Evolution of Cybersecurity (Mar 2023)</li><li>NSE 3: Product Awareness (Mar 2023)</li><li>NSE 4: FortiGate Administrator 7.4</li><li>NSE 6: FortiAnalyzer Administrator 7.4</li></ul></div></div></section>
 
-  <section id="projects">
-    <div class="sec-head reveal">
-      <h2>Projects</h2>
-   
-    </div>
-    <div class="proj-grid">
-      <div class="proj-card reveal"><span class="proj-emoji">🚢</span><h3>IMI Maritime Network Program</h3><p>Set technical strategy and monitored performance across firewalls and network systems for the International Maritime Industry project at SATEC.</p><div class="proj-tags"><span>Zabbix</span><span>NNMi</span><span>Cisco</span></div></div>
-      <div class="proj-card reveal"><span class="proj-emoji">🌐</span><h3>Industrial City Fiber Backbone</h3><p>Connected industrial-city buildings via fiber, and configured PaloAlto/Cisco firewalls to maintain LAN/WAN components network-wide.</p><div class="proj-tags"><span>Fiber</span><span>PaloAlto</span><span>LAN/WAN</span></div></div>
-      <div class="proj-card reveal"><span class="proj-emoji">📡</span><h3>Unified Surveillance &amp; Access Control</h3><p>Managed access points, surveillance cameras, and traffic control across devices via Huawei access control and Hikvision.</p><div class="proj-tags"><span>Hikvision</span><span>Huawei</span><span>CCTV</span></div></div>
-      <div class="proj-card reveal"><span class="proj-emoji">🛡️</span><h3>Network Security Overhaul</h3><p>Secured network and services at Dora Najd Resort, tracking incidents and implementing corrective plans for availability and latency.</p><div class="proj-tags"><span>Security</span><span>Incident Response</span></div></div>
-      <div class="proj-card reveal"><span class="proj-emoji">🗂️</span><h3>Enterprise Infrastructure</h3><p>Built and secured network infrastructure at Aswar Company, configuring switches, firewalls, and maintaining the Active Directory server.</p><div class="proj-tags"><span>Active Directory</span><span>Switches</span></div></div>
-    
-    </div>
-  </section>
+<section id="recommendation"><h2>Recommendation</h2>
+<blockquote class="quote">
+<p>I had the pleasure of managing Raid for nearly four years, and he was consistently one of the most reliable members of my team. Raid approaches every task with a high level of professionalism and possesses deep technical knowledge in his field. Whenever complex issues arose, his strong troubleshooting skills allowed him to quickly identify root causes and implement effective solutions. What truly sets Raid apart, however, is his proactive mindset: he never settles for just meeting expectations and is always looking for the next mile to deliver exceptional results. He would be a tremendous asset to any team.</p>
+<footer><span class="av" aria-hidden="true">RC</span><div><strong>Rui Cordeiro</strong> · <a href="https://www.linkedin.com/search/results/people/?keywords=Rui%20Cordeiro%20SATEC%20Arabia" rel="noopener">LinkedIn</a><small>Business Development Consultant at SATEC Arabia</small></div></footer>
+<span class="tag">Rui managed Raid directly · Jan 2023 to May 2026</span>
+</blockquote></section>
 
-  <section id="education">
-    <div class="sec-head reveal">
-      <h2>Education &amp; Certifications</h2>
-      <p>A degree in Information Technology, backed by continuous vendor-level training in networking, security, and voice.</p>
-    </div>
-    <div class="split">
-      <div class="reveal-left">
-        <div class="edu-block">
-          <h3>Bachelor of Science: Information Technology</h3>
-          <div class="edu-sub">Mashreq University, Sudan · 2015 — 2019</div>
-          <div class="course-tags">
-            <span>CCNA R&amp;SW</span><span>CCNA Voice over IP</span><span>CCNA Security R&amp;SW</span>
-            <span>CCNP ENARSI R&amp;SW</span><span>CCNA Security</span><span>HCIA</span><span>CCTV</span><span>MCSE 2016</span>
-          </div>
-        </div>
-        <div class="edu-block">
-          <h3>Fortinet NSE Track</h3>
-          <div class="edu-sub">Fortinet — Online, Official Website &amp; Lab III-Networking</div>
-          <div class="course-tags">
-            <span>NSE 1 — Product Awareness</span><span>NSE 2 — Evolution Cybersecurity</span>
-            <span>NSE 3 — Info Security Awareness</span><span>NSE 4 — FortiGate Admin 7.4</span><span>NSE 6 — FortiAnalyzer Admin 7.4</span>
-          </div>
-        </div>
-
-        <h4 class="lang-title" style="margin-top:40px;">Languages</h4>
-        <div class="lang-badges">
-          <div class="lang-badge ar"><h4>Arabic</h4><div class="lvl-track"><div class="lvl-fill"></div></div><span>Native</span></div>
-          <div class="lang-badge en"><h4>English</h4><div class="lvl-track"><div class="lvl-fill"></div></div><span>Professional working proficiency</span></div>
-        </div>
-        <p class="note-inline">Languages weren't listed on the resume — inferred from region and industry norms. Please correct if needed.</p>
-      </div>
-
-      <div class="reveal-right cert-list">
-        <div class="cert-item"><h4>Cisco Certified Network Professional Security</h4><span>Oct 2023</span></div>
-        <div class="cert-item"><h4>Cisco Certified Specialist — Network Security VPN</h4><span>Oct 2023</span></div>
-        <div class="cert-item"><h4>Cisco Certified Specialist — Network Security Core</h4><span>Aug 2023</span></div>
-        <div class="cert-item"><h4>Fortinet NSE 1 — Information Security Awareness</h4><span>Mar 2023</span></div>
-        <div class="cert-item"><h4>Fortinet NSE 2 — Evolution Cybersecurity</h4><span>Mar 2023</span></div>
-        <div class="cert-item"><h4>Fortinet NSE 3 — Product Awareness</h4><span>Mar 2023</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="testimonial">
-    <div class="sec-head reveal">
-      <h2>Recommendation</h2>
-    
-    </div>
-    <div class="testimonial-card reveal">
-      <p class="testimonial-quote">I had the pleasure of managing Raid for nearly four years, and he was consistently one of the most reliable members of my team. Raid approaches every task with a high level of professionalism and possesses deep technical knowledge in his field. Whenever complex issues arose, his strong troubleshooting skills allowed him to quickly identify root causes and implement effective solutions. What truly sets Raid apart, however, is his proactive mindset — he never settles for just meeting expectations and is always looking for the next mile to deliver exceptional results. He would be a tremendous asset to any team.</p>
-      <a class="testimonial-person" href="https://www.linkedin.com/in/ruicordeiro?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener">
-        <div class="testimonial-avatar">RC</div>
-        <div>
-          <h4>Rui Cordeiro <span style="font-size:12px; color:var(--cyan); font-weight:500;">↗ LinkedIn</span></h4>
-          <p>Business Development Consultant at SATEC Arabia</p>
-        </div>
-      </a>
-      <div class="testimonial-badge"><span class="dot"></span>Rui managed Raid directly · Jan 2023 - May 2026</div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="contact-layout">
-      <div class="contact-info reveal-left">
-        <h2>Contact Details<span class="grad">network.</span></h2>
-        <a class="contact-card" href="mailto:Raidmoh22@gmail.com">
-          <div class="ic">✉️</div>
-          <div><p>Email</p><p>Raidmoh22@gmail.com</p></div>
-        </a>
-        <a class="contact-card" href="tel:+966558501545">
-          <div class="ic">📞</div>
-          <div><p>Phone</p><p>00966 558 501 545</p></div>
-        </a>
-        <a class="contact-card" href="https://www.linkedin.com/in/raid-ismail-6375301ab" target="_blank" rel="noopener">
-          <div class="ic">🔗</div>
-          <div><p>LinkedIn</p><p>Raid Ismail</p></div>
-        </a>
-        <div class="contact-card">
-          <div class="ic">📍</div>
-          <div><p>Location</p><p>Dammam, Saudi Arabia</p></div>
-        </div>
-      
-          
-          
-         
-        </div>
-      </div>
-      <div class="ripple-stage reveal-right">
-        <div class="ripple"></div>
-        <div class="ripple"></div>
-        <div class="ripple"></div>
-        <div class="ripple-core">RI</div>
-      </div>
-    </div>
-  </section>
-  
-</div>
-
+<section id="contact" class="contact"><h2>Contact</h2>
+<a class="big" id="mail" href="#contact">Email</a>
+<a class="big" id="tel" href="#contact">Phone</a>
+<a class="big" href="https://www.linkedin.com/in/raid-ismail-6375301ab" rel="noopener">LinkedIn profile</a>
+<noscript><p>Turn on JavaScript to see my email and phone, or message me on LinkedIn.</p></noscript></section>
+</main>
+<footer><div class="wrap">© 2026 Raid Ismail</div></footer>
 
 <script>
-  /* ============ loader ============ */
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('loader').classList.add('hide');
-    }, 2000);
-  });
-
-  /* ============ marquee content ============ */
-  const marqueeItems = [
-    'SATEC','Dora Najd Resort','Aswar Company','CIN Trading','Sudan Internet Society','AZ Technology',
-    'Cisco','PaloAlto','Fortinet','Huawei','Hikvision','Elastic'
-  ];
-  const track = document.getElementById('marquee');
-  const full = [...marqueeItems, ...marqueeItems];
-  track.innerHTML = full.map(t => `<span>${t}</span>`).join('');
-
-  /* ============ particle canvas ============ */
-  const canvas = document.getElementById('bg-canvas');
-  const ctx = canvas.getContext('2d');
-  let w, h, particles;
-  const COLORS = ['#6a5cff', '#ff2e88', '#23e5d3', '#ffb444'];
-  const DPR = Math.min(window.devicePixelRatio || 1, 2);
-
-  function resize(){
-    w = window.innerWidth;
-    h = document.documentElement.scrollHeight;
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
-    canvas.width = w * DPR;
-    canvas.height = h * DPR;
-    ctx.setTransform(DPR,0,0,DPR,0,0);
-  }
-  function makeParticles(){
-    const count = Math.max(46, Math.min(110, Math.floor((w * window.innerHeight) / 16000)));
-    particles = Array.from({length: count}, () => ({
-      x: Math.random() * w, y: Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28,
-      r: Math.random() * 1.6 + 0.8, color: COLORS[Math.floor(Math.random() * COLORS.length)]
-    }));
-  }
-  let scrollY = 0;
-  function step(){
-    ctx.clearRect(0, 0, w, window.innerHeight * 40);
-    const top = scrollY - window.innerHeight * 0.2;
-    const bottom = scrollY + window.innerHeight * 1.2;
-    for (const p of particles){
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = w; else if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = window.innerHeight; else if (p.y > window.innerHeight) p.y = 0;
-    }
-    const bandCount = Math.ceil(document.documentElement.scrollHeight / window.innerHeight) + 1;
-    ctx.save();
-    for (let b = 0; b < bandCount; b++){
-      const offsetY = b * window.innerHeight;
-      if (offsetY + window.innerHeight < top - window.innerHeight || offsetY > bottom + window.innerHeight) continue;
-      for (let i = 0; i < particles.length; i++){
-        const p = particles[i]; const py = p.y + offsetY;
-        for (let j = i + 1; j < particles.length; j++){
-          const q = particles[j]; const qy = q.y + offsetY;
-          const dx = p.x - q.x, dy = py - qy;
-          const dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < 118){
-            ctx.strokeStyle = p.color;
-            ctx.globalAlpha = (1 - dist / 118) * 0.16;
-            ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(p.x, py); ctx.lineTo(q.x, qy); ctx.stroke();
-          }
-        }
-      }
-      for (const p of particles){
-        const py = p.y + offsetY;
-        ctx.globalAlpha = 0.85; ctx.fillStyle = p.color;
-        ctx.beginPath(); ctx.arc(p.x, py, p.r, 0, Math.PI * 2); ctx.fill();
-      }
-    }
-    ctx.restore(); ctx.globalAlpha = 1;
-    requestAnimationFrame(step);
-  }
-  function init(){ resize(); makeParticles(); }
-  window.addEventListener('resize', () => { init(); });
-  window.addEventListener('scroll', () => { scrollY = window.scrollY; }, {passive:true});
-  init();
-  requestAnimationFrame(step);
-
-  /* ============ custom cursor ============ */
-  const dot = document.getElementById('cursor-dot');
-  const ring = document.getElementById('cursor-ring');
-  let mx = window.innerWidth/2, my = window.innerHeight/2, rx = mx, ry = my;
-  window.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
-  });
-  window.addEventListener('mousedown', () => document.body.classList.add('cursor-down'));
-  window.addEventListener('mouseup', () => document.body.classList.remove('cursor-down'));
-  function animateRing(){
-    rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16;
-    ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-  function bindHover(){
-    document.querySelectorAll('a, .skill-chip, .cert-item, .contact-card, .proj-card, .job').forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-    });
-  }
-  bindHover();
-
-  /* ============ scroll reveal ============ */
-  /* ============ in-page nav: scroll via JS, avoid native hash navigation ============ */
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function(e){
-      const id = this.getAttribute('href').slice(1);
-      const target = document.getElementById(id);
-      if (target){
-        e.preventDefault();
-        target.scrollIntoView({behavior:'smooth', block:'start'});
-      }
-    });
-  });
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting){
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => io.observe(el));
-
-  /* ============ skill bars fill on scroll ============ */
-  const skillIO = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting){
-        const fill = entry.target;
-        const pct = fill.getAttribute('data-pct');
-        fill.style.width = pct + '%';
-        setTimeout(() => fill.classList.add('swept'), 50);
-        skillIO.unobserve(fill);
-      }
-    });
-  }, { threshold: 0.4 });
-  document.querySelectorAll('.skill-bar-fill').forEach(el => skillIO.observe(el));
+(function(){
+var u=['raidmoh22','gmail.com'].join('@'),n='+966'+'558501545';
+var m=document.getElementById('mail'),t=document.getElementById('tel');
+m.href='mailto:'+u;m.textContent=u;
+t.href='tel:'+n;t.textContent='00966 558 501 545';
+})();
+(function(){
+var r=document.documentElement,b=document.getElementById('theme'),mq=window.matchMedia('(prefers-color-scheme: dark)');
+var sun='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.900 4.900l1.400 1.400M17.700 17.700l1.400 1.400M4.900 19.100l1.400-1.400M17.700 6.300l1.400-1.400"/></svg>';
+var moon='<svg viewBox="0 0 24 24"><path d="M21 12.800A9 9 0 1111.200 3a7 7 0 009.800 9.800z"/></svg>';
+function isDark(){var t=r.getAttribute('data-theme');return t?t==='dark':mq.matches}
+function paint(){var d=isDark();b.innerHTML=d?sun:moon;b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode')}
+try{var v=localStorage.getItem('theme');if(v==='dark'||v==='light')r.setAttribute('data-theme',v)}catch(e){}
+b.addEventListener('click',function(){var n=isDark()?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}paint()});
+mq.addEventListener&&mq.addEventListener('change',paint);
+paint();
+})();
 </script>
-
 </body>
 </html>
